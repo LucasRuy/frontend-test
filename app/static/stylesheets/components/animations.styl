@@ -1,0 +1,43 @@
+// =========================================
+// Animations ------------------------------
+
+	// -------------------------------------
+	// Slide to Left
+	@keyframes slideLeft
+		0%
+			opacity 0
+			transform translateX(-50px)
+		100%
+			opacity 1
+			transform translateX(0px)
+
+	// -------------------------------------
+	// Slide to Left back
+	@keyframes slideLeftBack 
+		0% 
+			opacity 1
+			transform translateX(0px)
+		100% 
+			opacity 0
+			transform translateX(-50px)			
+
+	// -------------------------------------
+	// Fade in effect
+	@keyframes fadeIn 
+		0% 
+			opacity 0
+			visibility hidden	
+		100% 
+			opacity 1
+			visibility visible
+
+	// -------------------------------------
+	// Fade out effect
+	@keyframes fadeOut 
+		0% 
+			opacity 1
+			visibility visible
+		100% 
+			opacity 0
+			visibility hidden
+

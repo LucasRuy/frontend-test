@@ -1,0 +1,25 @@
+// =========================================
+// Mixins ----------------------------------
+
+	// ------------------------------
+	// Clearfix mixin
+	// Use example within your class, call clearfix() to fix float
+	clearfix()
+		clear both
+		&:before 
+			content ''
+			display block
+		&:after 
+			content ''
+			display table
+			clear both
+
+	// ------------------------------
+	// Grid system
+	// Use example within your class, call grid() with the desired width
+	// OBS Inside the 'variables.scss' file, there are values of the column widths
+	grid(value)
+		display inline-block
+		width value
+		float left
+		padding 0px
