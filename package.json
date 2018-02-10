@@ -2,10 +2,29 @@
   "name": "R7FrontendTest",
   "version": "0.0.1",
   "scripts": {
-    "start": "node app.js"
+    "start": "gulp"
   },
-  "dependencies": {
-    "connect": "~3.1.1",
-    "serve-static": "~1.5.3"
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^8.0.0",
+    "browser-sync": "^2.23.6",
+    "browserify": "^16.0.0",
+    "gulp": "^3.9.1",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-pug": "^3.3.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-stylus": "^2.7.0",
+    "require-dir": "^1.0.0",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
   }
 }
