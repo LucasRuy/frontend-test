@@ -2,10 +2,10 @@
 // Import Functions  -----------------------
 
 	// Default -------------------------------
-	import initFunction from './components/initFunction.js';
+	import ExampleFunction from './components/ExampleFunction';
 
 // =========================================
 // Init Events  ----------------------------
 window.addEventListener('load', function(){
-	initFunction();
+	ExampleFunction();
 });

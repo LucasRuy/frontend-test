@@ -6,20 +6,30 @@
 	// Use example within your class, call clearfix() to fix float
 	clearfix()
 		clear both
-		&:before 
+		&:before
 			content ''
 			display block
-		&:after 
+		&:after
 			content ''
 			display table
 			clear both
 
 	// ------------------------------
+	// BEM CSS mixins
+	// Use example: within your class, call +el('NameOfYourElement'), +mod('NameOfYourModifier')
+	el(element)
+		&__{element}
+			{block}
+
+	mod(modifier)
+		&--{modifier}
+			{block}
+
+	// ------------------------------
 	// Grid system
-	// Use example within your class, call grid() with the desired width
-	// OBS Inside the 'variables.scss' file, there are values of the column widths
+	// Use example: within your class, call grid() with the desired width
+	// OBS: Inside the 'variables.styl' file, there are values of the column widths
 	grid(value)
-		display inline-block
-		width value
-		float left
-		padding 0px
+		width: value
+		float: left
+		padding: em(0px) em(15px)
