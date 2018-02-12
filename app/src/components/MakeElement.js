@@ -2,6 +2,7 @@ const MakeElement = (userResponse, currentIndex) => {
   const { name, description, picture } = userResponse.infos.user;
 
   const listWrapper = document.querySelector('.ranking__body');
+  const tooltip     = document.querySelector('.tooltip');
   const listItem    = document.createElement('li');
 
   listItem.setAttribute('class', 'ranking__body__item');
@@ -20,7 +21,7 @@ const MakeElement = (userResponse, currentIndex) => {
   `;
 
   listItem.innerHTML = markup;
-  listWrapper.appendChild(listItem);
+  listWrapper.insertBefore(listItem, tooltip);
 };
 
 export default MakeElement;

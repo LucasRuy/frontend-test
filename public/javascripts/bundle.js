@@ -147,6 +147,7 @@ var MakeElement = function MakeElement(userResponse, currentIndex) {
 
 
   var listWrapper = document.querySelector('.ranking__body');
+  var tooltip = document.querySelector('.tooltip');
   var listItem = document.createElement('li');
 
   listItem.setAttribute('class', 'ranking__body__item');
@@ -155,7 +156,7 @@ var MakeElement = function MakeElement(userResponse, currentIndex) {
   var markup = '\n    <div class="item-image">\n      <figure>\n        <img src=\'' + picture + '\' alt=\'' + name + '\' />\n      </figure>\n    </div>\n    <div class="item-divisor">\n      <h3>' + name + '</h3>\n      <h6>' + description + '</h6>\n    </div>\n  ';
 
   listItem.innerHTML = markup;
-  listWrapper.appendChild(listItem);
+  listWrapper.insertBefore(listItem, tooltip);
 };
 
 exports.default = MakeElement;
