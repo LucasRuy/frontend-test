@@ -12,13 +12,20 @@ const ValidadePercent = (p, n) => {
   };
 
   let total = checkValue(positive) + checkValue(negative);
-  let splited = ((positive / total) * 100).toFixed(0);
+  let positiveResult = ((positive / total) * 100).toFixed(0);
+  let negativeResult = Math.abs(positiveResult - 100);
 
-  if(splited === 'NaN'){
-    splited = '0';
+  if(positiveResult === 'NaN' || negativeResult === 'NaN'){
+    positiveResult = '0';
+    negativeResult = '0';
   }
 
-  return splited;
+  const results = {
+    positive: parseInt(positiveResult),
+    negative: parseInt(negativeResult)
+  };
+
+  return results;
 };
 
 export default ValidadePercent;

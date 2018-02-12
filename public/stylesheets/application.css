@@ -100,6 +100,9 @@ visibility visible {
   font-size: 24px;
   color: #909090;
 }
+.tooltip p:after {
+  content: '%';
+}
 .tooltip__aproved {
   width: 45%;
   float: left;

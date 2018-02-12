@@ -1,6 +1,8 @@
 import ChangeTooltipPosition  from './ChangeTooltipPosition';
+import ChangeTooltipValue     from './ChangeTooltipValue';
 import ValidadePercent        from './ValidadePercent';
 import MakeElement            from './MakeElement';
+import { orderObjDesc }       from '../utils';
 
 const ExampleFunction = () => {
 
@@ -9,33 +11,25 @@ const ExampleFunction = () => {
   userInfos
     .then(response => response.json())
     .then(response => {
-      const arr = new Array();
+      const temp    = new Array();
 
       for(let item in response.data){
         const { positive, negative } = response.data[item];
 
-        arr.push({
-          positive: ValidadePercent(positive, negative),
+        temp.push({
+          positive: ValidadePercent(positive, negative).positive,
+          negative: ValidadePercent(positive, negative).negative,
           infos: {user: response.data[item]}
         });
       }
 
-      const orderObjDesc = function(a, b) {
-        if (a.positive < b.positive) {
-          return 1;
-        }
-        if (a.positive > b.positive) {
-          return -1;
-        }
-        return 0;
-      }
-
-      let ranking = arr.sort(orderObjDesc);
+      let ranking = temp.sort(orderObjDesc);
 
       ranking.forEach((element, index) => {
         MakeElement(element, index);
       });
 
+      ChangeTooltipValue(ranking);
       ChangeTooltipPosition();
     })
     .catch(err => console.error(err));
