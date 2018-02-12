@@ -62,7 +62,7 @@ var ExampleFunction = function ExampleFunction() {
       });
     }
 
-    var orderDesc = function orderDesc(a, b) {
+    var orderObjDesc = function orderObjDesc(a, b) {
       if (a.positive < b.positive) {
         return 1;
       }
@@ -72,11 +72,9 @@ var ExampleFunction = function ExampleFunction() {
       return 0;
     };
 
-    var ranking = arr.sort(orderDesc);
+    var ranking = arr.sort(orderObjDesc);
 
     ranking.forEach(function (element) {
-      console.log(element);
-
       (0, _MakeElement2.default)(element);
     });
   }).catch(function (err) {

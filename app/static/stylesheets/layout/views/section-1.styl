@@ -72,6 +72,7 @@
         h6
           color c-gray
 
+
       &:nth-child(2n+2)
         background-color c-gray-light
 
@@ -80,6 +81,28 @@
 
       &:last-child
         border-radius 0px 0px 3px 3px
+
+      for i in (1..5)
+        &:nth-child({i})::after
+          content \'i\'
+          text-align center
+          line-height 19px
+          font-size 14px
+          font-weight 700
+
+          position absolute
+          top 65px
+          left 65px
+
+          display block
+          width 22px
+          height 22px
+
+          background-color c-white
+          color c-gray
+
+          border-radius 20px
+          border 2px solid c-gray
 
       &:hover
         background-color c-red
