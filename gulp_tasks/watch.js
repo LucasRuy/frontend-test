@@ -7,7 +7,7 @@ gulp.task('watch', () => {
     [
       'app/static/templates/index.pug',
       'app/static/templates/views/!(_)*.pug',
-      'app/static/templates/includes/!(_)*.pug'
+      'app/static/templates/components/!(_)*.pug'
     ],
     ['pug']
   );

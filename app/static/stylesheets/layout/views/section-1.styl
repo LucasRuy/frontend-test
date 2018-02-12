@@ -39,6 +39,8 @@
     border-radius 4px
     color c-black
 
+    position relative
+
     +el('item')
       position relative
       grid(100%)
@@ -82,7 +84,7 @@
       &:last-child
         border-radius 0px 0px 3px 3px
 
-      for i in (1..5)
+      for i in (1..6)
         &:nth-child({i})::after
           content \'i\'
           text-align center

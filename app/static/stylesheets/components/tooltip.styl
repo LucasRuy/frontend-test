@@ -1,0 +1,66 @@
+.tooltip
+  box-sizing border-box
+  display block
+  width 160px
+  height 50px
+
+  border-radius 4px
+  background-color #fff
+  color #272727
+
+  position absolute
+  top 0px
+  right -175px
+
+  text-transform uppercase
+  text-align center
+
+  margin-top 22px
+  transition t-default
+
+  &:before
+    content ''
+    position absolute
+    top 50%
+    left -8px
+
+    transform translateY(-50%)
+
+    width 0
+    height 0
+
+    border-top 7px solid transparent
+    border-bottom 7px solid transparent
+
+    border-right 8px solid c-white
+
+  header
+    background-color c-red
+    color c-white
+
+    height 18px
+    line-height 18px
+
+    h6
+      font-size 10px
+      font-weight 700
+
+  p
+    font-weight 700
+    font-size 24px
+    color c-gray
+
+
+  +el('aproved')
+    grid(45%)
+    height 100%
+    border-right 1px solid c-black
+    header
+      border-radius 4px 0px 0px 0px
+
+  +el('reproved')
+    grid(55%)
+    height 100%
+    border-left 1px solid rgba(255, 255, 255, 0.5)
+    header
+      border-radius 0px 4px 0px 0px
