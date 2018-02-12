@@ -20,7 +20,7 @@ const ExampleFunction = () => {
         });
       }
 
-      const orderDesc = function(a, b) {
+      const orderObjDesc = function(a, b) {
         if (a.positive < b.positive) {
           return 1;
         }
@@ -30,11 +30,9 @@ const ExampleFunction = () => {
         return 0;
       }
 
-      let ranking = arr.sort(orderDesc);
+      let ranking = arr.sort(orderObjDesc);
 
       ranking.forEach(element => {
-        console.log(element);
-
         MakeElement(element);
       });
 
