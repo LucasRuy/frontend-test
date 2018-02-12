@@ -6,7 +6,7 @@ import require_dir from 'require-dir';
 export const directories = {
   app: {
     images: './app/static/images/*',
-    templates: 'app/static/templates/**/*.pug',
+    templates: 'app/static/templates/index.pug',
     stylesheets: 'app/static/stylesheets/application.styl',
     javascripts: 'app/src/app.js',
     json: 'app/src/json/*.json'

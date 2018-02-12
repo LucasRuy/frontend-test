@@ -5,11 +5,11 @@
   import 'whatwg-fetch';
   import 'promise/polyfill';
 
-	// Default -------------------------------
-	import ExampleFunction from './components/ExampleFunction';
+	// Default ------------------------------
+	import CreatePersons from './components/CreatePersons';
 
-// =========================================
-// Init Events  ----------------------------
+// ========================================
+// Init Events  ---------------------------
 window.addEventListener('load', function(){
-	ExampleFunction();
+	CreatePersons();
 });
