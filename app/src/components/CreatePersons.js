@@ -1,39 +1,42 @@
+import ValidadePercent  from './ValidadePercent';
+import MakeElement      from './MakeElement';
+
 const ExampleFunction = () => {
 
   const userInfos = fetch('/javascripts/fazenda.json', { method: 'GET' });
-
-  const makeElement = (userResponse) => {
-    const { name, description, picture } = userResponse;
-
-    const listWrapper = document.querySelector('.ranking__body');
-    const listItem    = document.createElement('li');
-
-    listItem.setAttribute('class', 'ranking__body__item')
-
-    const markup = `
-      <div class="item-image">
-        <figure>
-          <img src='${picture}' alt='${name}' />
-        </figure>
-      </div>
-      <div class="item-divisor">
-        <h3>${name}</h3>
-        <h6>${description}</h6>
-      </div>
-    `;
-
-    listItem.innerHTML = markup;
-    listWrapper.appendChild(listItem);
-  };
 
   userInfos
     .then(response => response.json())
     .then(response => {
       console.log('Persons: ', response);
+      const arr = new Array();
 
       for(let item in response.data){
-        makeElement(response.data[item]);
+        const { positive, negative } = response.data[item];
+
+        arr.push({
+          positive: ValidadePercent(positive, negative),
+          infos: {user: response.data[item]}
+        });
       }
+
+      const orderDesc = function(a, b) {
+        if (a.positive < b.positive) {
+          return 1;
+        }
+        if (a.positive > b.positive) {
+          return -1;
+        }
+        return 0;
+      }
+
+      let ranking = arr.sort(orderDesc);
+
+      ranking.forEach(element => {
+        console.log(element);
+
+        MakeElement(element);
+      });
 
     })
     .catch(err => console.error(err));

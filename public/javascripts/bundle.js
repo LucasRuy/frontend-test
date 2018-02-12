@@ -23,40 +23,62 @@ window.addEventListener('load', function () {
 
 // Polyfill -----------------------------
 
-},{"./components/CreatePersons":2,"promise/polyfill":8,"whatwg-fetch":9}],2:[function(require,module,exports){
+},{"./components/CreatePersons":2,"promise/polyfill":10,"whatwg-fetch":11}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _ValidadePercent = require('./ValidadePercent');
+
+var _ValidadePercent2 = _interopRequireDefault(_ValidadePercent);
+
+var _MakeElement = require('./MakeElement');
+
+var _MakeElement2 = _interopRequireDefault(_MakeElement);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var ExampleFunction = function ExampleFunction() {
 
   var userInfos = fetch('/javascripts/fazenda.json', { method: 'GET' });
-
-  var makeElement = function makeElement(userResponse) {
-    var name = userResponse.name,
-        description = userResponse.description,
-        picture = userResponse.picture;
-
-    var listWrapper = document.querySelector('.ranking__body');
-    var listItem = document.createElement('li');
-
-    listItem.setAttribute('class', 'ranking__body__item');
-
-    var markup = '\n      <div class="item-image">\n        <figure>\n          <img src=\'' + picture + '\' alt=\'' + name + '\' />\n        </figure>\n      </div>\n      <div class="item-divisor">\n        <h3>' + name + '</h3>\n        <h6>' + description + '</h6>\n      </div>\n    ';
-
-    listItem.innerHTML = markup;
-    listWrapper.appendChild(listItem);
-  };
 
   userInfos.then(function (response) {
     return response.json();
   }).then(function (response) {
     console.log('Persons: ', response);
+    var arr = new Array();
 
     for (var item in response.data) {
-      makeElement(response.data[item]);
+      var _response$data$item = response.data[item],
+          positive = _response$data$item.positive,
+          negative = _response$data$item.negative;
+
+
+      arr.push({
+        positive: (0, _ValidadePercent2.default)(positive, negative),
+        infos: { user: response.data[item] }
+      });
     }
+
+    var orderDesc = function orderDesc(a, b) {
+      if (a.positive < b.positive) {
+        return 1;
+      }
+      if (a.positive > b.positive) {
+        return -1;
+      }
+      return 0;
+    };
+
+    var ranking = arr.sort(orderDesc);
+
+    ranking.forEach(function (element) {
+      console.log(element);
+
+      (0, _MakeElement2.default)(element);
+    });
   }).catch(function (err) {
     return console.error(err);
   });
@@ -64,7 +86,67 @@ var ExampleFunction = function ExampleFunction() {
 
 exports.default = ExampleFunction;
 
-},{}],3:[function(require,module,exports){
+},{"./MakeElement":3,"./ValidadePercent":4}],3:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var MakeElement = function MakeElement(userResponse) {
+  var _userResponse$infos$u = userResponse.infos.user,
+      name = _userResponse$infos$u.name,
+      description = _userResponse$infos$u.description,
+      picture = _userResponse$infos$u.picture;
+
+
+  var listWrapper = document.querySelector('.ranking__body');
+  var listItem = document.createElement('li');
+
+  listItem.setAttribute('class', 'ranking__body__item');
+
+  var markup = '\n    <div class="item-image">\n      <figure>\n        <img src=\'' + picture + '\' alt=\'' + name + '\' />\n      </figure>\n    </div>\n    <div class="item-divisor">\n      <h3>' + name + '</h3>\n      <h6>' + description + '</h6>\n    </div>\n  ';
+
+  listItem.innerHTML = markup;
+  listWrapper.appendChild(listItem);
+};
+
+exports.default = MakeElement;
+
+},{}],4:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var ValidadePercent = function ValidadePercent(p, n) {
+  var positive = p;
+  var negative = n;
+
+  var checkValue = function checkValue(currentValue) {
+    if ((typeof currentValue === 'undefined' ? 'undefined' : _typeof(currentValue)) === _typeof('string')) {
+      currentValue = parseInt(currentValue);
+    } else if (currentValue === null || currentValue === undefined) {
+      currentValue = 0;
+    }
+    return currentValue;
+  };
+
+  var total = checkValue(positive) + checkValue(negative);
+  var splited = (positive / total * 100).toFixed(0);
+
+  if (splited === 'NaN') {
+    splited = '0';
+  }
+
+  return splited;
+};
+
+exports.default = ValidadePercent;
+
+},{}],5:[function(require,module,exports){
 "use strict";
 
 // rawAsap provides everything we need except exception management.
@@ -132,7 +214,7 @@ RawTask.prototype.call = function () {
     }
 };
 
-},{"./raw":4}],4:[function(require,module,exports){
+},{"./raw":6}],6:[function(require,module,exports){
 (function (global){
 "use strict";
 
@@ -359,7 +441,7 @@ rawAsap.makeRequestCallFromTimer = makeRequestCallFromTimer;
 // https://github.com/tildeio/rsvp.js/blob/cddf7232546a9cf858524b75cde6f9edf72620a7/lib/rsvp/asap.js
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],5:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 'use strict';
 
 var asap = require('asap/raw');
@@ -574,7 +656,7 @@ function doResolve(fn, promise) {
   }
 }
 
-},{"asap/raw":4}],6:[function(require,module,exports){
+},{"asap/raw":6}],8:[function(require,module,exports){
 'use strict';
 
 //This file contains the ES6 extensions to the core Promises/A+ API
@@ -683,7 +765,7 @@ Promise.prototype['catch'] = function (onRejected) {
   return this.then(null, onRejected);
 };
 
-},{"./core.js":5}],7:[function(require,module,exports){
+},{"./core.js":7}],9:[function(require,module,exports){
 // should work in any browser without browserify
 
 if (typeof Promise.prototype.done !== 'function') {
@@ -696,7 +778,7 @@ if (typeof Promise.prototype.done !== 'function') {
     })
   }
 }
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 // not "use strict" so we can declare global "Promise"
 
 var asap = require('asap');
@@ -708,7 +790,7 @@ if (typeof Promise === 'undefined') {
 
 require('./polyfill-done.js');
 
-},{"./lib/core.js":5,"./lib/es6-extensions.js":6,"./polyfill-done.js":7,"asap":3}],9:[function(require,module,exports){
+},{"./lib/core.js":7,"./lib/es6-extensions.js":8,"./polyfill-done.js":9,"asap":5}],11:[function(require,module,exports){
 (function(self) {
   'use strict';
 
