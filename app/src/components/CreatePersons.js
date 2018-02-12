@@ -1,5 +1,6 @@
-import ValidadePercent  from './ValidadePercent';
-import MakeElement      from './MakeElement';
+import ChangeTooltipPosition  from './ChangeTooltipPosition';
+import ValidadePercent        from './ValidadePercent';
+import MakeElement            from './MakeElement';
 
 const ExampleFunction = () => {
 
@@ -8,7 +9,6 @@ const ExampleFunction = () => {
   userInfos
     .then(response => response.json())
     .then(response => {
-      console.log('Persons: ', response);
       const arr = new Array();
 
       for(let item in response.data){
@@ -32,10 +32,11 @@ const ExampleFunction = () => {
 
       let ranking = arr.sort(orderObjDesc);
 
-      ranking.forEach(element => {
-        MakeElement(element);
+      ranking.forEach((element, index) => {
+        MakeElement(element, index);
       });
 
+      ChangeTooltipPosition();
     })
     .catch(err => console.error(err));
 };

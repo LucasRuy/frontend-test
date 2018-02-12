@@ -4,8 +4,9 @@
   // Polyfill -----------------------------
   import 'whatwg-fetch';
   import 'promise/polyfill';
+  import 'nodelist-foreach-polyfill';
 
-	// Default ------------------------------
+	// CreatePersons ------------------------
 	import CreatePersons from './components/CreatePersons';
 
 // ========================================

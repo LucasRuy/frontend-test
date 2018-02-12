@@ -5,6 +5,8 @@ require('whatwg-fetch');
 
 require('promise/polyfill');
 
+require('nodelist-foreach-polyfill');
+
 var _CreatePersons = require('./components/CreatePersons');
 
 var _CreatePersons2 = _interopRequireDefault(_CreatePersons);
@@ -13,22 +15,68 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // ========================================
 // Init Events  ---------------------------
-window.addEventListener('load', function () {
-  (0, _CreatePersons2.default)();
-});
-
-// Default ------------------------------
 // =========================================
 // Import Functions  -----------------------
 
 // Polyfill -----------------------------
+window.addEventListener('load', function () {
+  (0, _CreatePersons2.default)();
+});
 
-},{"./components/CreatePersons":2,"promise/polyfill":10,"whatwg-fetch":11}],2:[function(require,module,exports){
+// CreatePersons ------------------------
+
+},{"./components/CreatePersons":3,"nodelist-foreach-polyfill":8,"promise/polyfill":12,"whatwg-fetch":13}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var ChangeTooltipPosition = function ChangeTooltipPosition() {
+  var hover = document.querySelector('.tooltip');
+  var items = document.querySelectorAll('.ranking__body__item');
+  var screen = window.innerWidth;
+
+  var changePosition = function changePosition(e) {
+    e.preventDefault();
+
+    var current = e.currentTarget.dataset.id;
+    var accordion = document.querySelector('.ranking__body');
+
+    var getAccordionHeight = window.getComputedStyle(accordion).height.split('px')[0];
+    var translateY = getAccordionHeight / items.length;
+
+    items.forEach(function (element, index) {
+      hover.style.transform = 'translateY(' + translateY * current + 'px)';
+    });
+  };
+
+  var defaultPosition = function defaultPosition(e) {
+    e.preventDefault();
+    hover.style.transform = 'translateY(0px)';
+  };
+
+  items.forEach(function (element, index) {
+    if (screen >= 768) {
+      items[index].addEventListener('mouseover', changePosition, false);
+      items[index].addEventListener('mouseleave', defaultPosition, false);
+    } else {
+      items[index].addEventListener('click', changePosition, false);
+    }
+  });
+};
+
+exports.default = ChangeTooltipPosition;
+
+},{}],3:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _ChangeTooltipPosition = require('./ChangeTooltipPosition');
+
+var _ChangeTooltipPosition2 = _interopRequireDefault(_ChangeTooltipPosition);
 
 var _ValidadePercent = require('./ValidadePercent');
 
@@ -47,7 +95,6 @@ var ExampleFunction = function ExampleFunction() {
   userInfos.then(function (response) {
     return response.json();
   }).then(function (response) {
-    console.log('Persons: ', response);
     var arr = new Array();
 
     for (var item in response.data) {
@@ -74,9 +121,11 @@ var ExampleFunction = function ExampleFunction() {
 
     var ranking = arr.sort(orderObjDesc);
 
-    ranking.forEach(function (element) {
-      (0, _MakeElement2.default)(element);
+    ranking.forEach(function (element, index) {
+      (0, _MakeElement2.default)(element, index);
     });
+
+    (0, _ChangeTooltipPosition2.default)();
   }).catch(function (err) {
     return console.error(err);
   });
@@ -84,13 +133,13 @@ var ExampleFunction = function ExampleFunction() {
 
 exports.default = ExampleFunction;
 
-},{"./MakeElement":3,"./ValidadePercent":4}],3:[function(require,module,exports){
+},{"./ChangeTooltipPosition":2,"./MakeElement":4,"./ValidadePercent":5}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var MakeElement = function MakeElement(userResponse) {
+var MakeElement = function MakeElement(userResponse, currentIndex) {
   var _userResponse$infos$u = userResponse.infos.user,
       name = _userResponse$infos$u.name,
       description = _userResponse$infos$u.description,
@@ -101,6 +150,7 @@ var MakeElement = function MakeElement(userResponse) {
   var listItem = document.createElement('li');
 
   listItem.setAttribute('class', 'ranking__body__item');
+  listItem.setAttribute('data-id', currentIndex);
 
   var markup = '\n    <div class="item-image">\n      <figure>\n        <img src=\'' + picture + '\' alt=\'' + name + '\' />\n      </figure>\n    </div>\n    <div class="item-divisor">\n      <h3>' + name + '</h3>\n      <h6>' + description + '</h6>\n    </div>\n  ';
 
@@ -110,7 +160,7 @@ var MakeElement = function MakeElement(userResponse) {
 
 exports.default = MakeElement;
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -144,7 +194,7 @@ var ValidadePercent = function ValidadePercent(p, n) {
 
 exports.default = ValidadePercent;
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 "use strict";
 
 // rawAsap provides everything we need except exception management.
@@ -212,7 +262,7 @@ RawTask.prototype.call = function () {
     }
 };
 
-},{"./raw":6}],6:[function(require,module,exports){
+},{"./raw":7}],7:[function(require,module,exports){
 (function (global){
 "use strict";
 
@@ -439,7 +489,17 @@ rawAsap.makeRequestCallFromTimer = makeRequestCallFromTimer;
 // https://github.com/tildeio/rsvp.js/blob/cddf7232546a9cf858524b75cde6f9edf72620a7/lib/rsvp/asap.js
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
+if (window.NodeList && !NodeList.prototype.forEach) {
+    NodeList.prototype.forEach = function (callback, thisArg) {
+        thisArg = thisArg || window;
+        for (var i = 0; i < this.length; i++) {
+            callback.call(thisArg, this[i], i, this);
+        }
+    };
+}
+
+},{}],9:[function(require,module,exports){
 'use strict';
 
 var asap = require('asap/raw');
@@ -654,7 +714,7 @@ function doResolve(fn, promise) {
   }
 }
 
-},{"asap/raw":6}],8:[function(require,module,exports){
+},{"asap/raw":7}],10:[function(require,module,exports){
 'use strict';
 
 //This file contains the ES6 extensions to the core Promises/A+ API
@@ -763,7 +823,7 @@ Promise.prototype['catch'] = function (onRejected) {
   return this.then(null, onRejected);
 };
 
-},{"./core.js":7}],9:[function(require,module,exports){
+},{"./core.js":9}],11:[function(require,module,exports){
 // should work in any browser without browserify
 
 if (typeof Promise.prototype.done !== 'function') {
@@ -776,7 +836,7 @@ if (typeof Promise.prototype.done !== 'function') {
     })
   }
 }
-},{}],10:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 // not "use strict" so we can declare global "Promise"
 
 var asap = require('asap');
@@ -788,7 +848,7 @@ if (typeof Promise === 'undefined') {
 
 require('./polyfill-done.js');
 
-},{"./lib/core.js":7,"./lib/es6-extensions.js":8,"./polyfill-done.js":9,"asap":5}],11:[function(require,module,exports){
+},{"./lib/core.js":9,"./lib/es6-extensions.js":10,"./polyfill-done.js":11,"asap":6}],13:[function(require,module,exports){
 (function(self) {
   'use strict';
 

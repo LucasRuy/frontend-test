@@ -11,6 +11,7 @@
     }
   },
   "dependencies": {
+    "nodelist-foreach-polyfill": "^1.2.0",
     "promise-polyfill": "^7.1.0",
     "whatwg-fetch": "^2.0.3"
   },

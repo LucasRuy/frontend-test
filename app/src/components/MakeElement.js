@@ -1,10 +1,11 @@
-const MakeElement = (userResponse) => {
+const MakeElement = (userResponse, currentIndex) => {
   const { name, description, picture } = userResponse.infos.user;
 
   const listWrapper = document.querySelector('.ranking__body');
   const listItem    = document.createElement('li');
 
-  listItem.setAttribute('class', 'ranking__body__item')
+  listItem.setAttribute('class', 'ranking__body__item');
+  listItem.setAttribute('data-id', currentIndex);
 
   const markup = `
     <div class="item-image">
