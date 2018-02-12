@@ -1,7 +1,7 @@
 .ranking
   display block
   width 375px
-  margin 0px auto
+  margin 28px auto
   padding 130px 15px 0px
 
   +el('header')
@@ -29,7 +29,6 @@
         background-color c-white
         border-radius 50px 4px 4px 150px
         color c-black
-
 
   +el('body')
     grid(100%)
@@ -90,7 +89,7 @@
       &:last-child
         border-radius 0px 0px 3px 3px
 
-      for i in (1..6)
+      for i in (1..5)
         &:nth-child({i})::after
           content \'i\'
           text-align center
@@ -121,3 +120,76 @@
             color c-white
           h6
             color c-black
+
+
+
++media('mobile')
+  .ranking
+    width 90%
+
+    +el('header')
+      .r-col
+        padding 0px
+
+        &:nth-child(1)
+          bottom 42px
+          left 50%
+          transform translateX(-50%)
+
+        &:nth-child(2)
+          text-align center
+          border-radius 4px 4px 4px 4px
+
+    +el('body')
+      position relative
+
+      +el('item')
+        .item-divisor
+          h3
+            font-size 16px
+          h6
+            font-size 10px
+
++media('tablet')
+  .ranking
+    width 75%
+
+    +el('header')
+      .r-col
+        padding 0px
+
+        &:nth-child(1)
+          bottom 42px
+          left 50%
+          transform translateX(-50%)
+
+        &:nth-child(2)
+          text-align center
+          border-radius 4px 4px 4px 4px
+
+    +el('body')
+      position relative
+
+      +el('item')
+        .item-divisor
+          h3
+            font-size 18px
+          h6
+            font-size 12px
+
++media('desktop')
+  .ranking
+    width 375px
+
+    +el('header')
+      .r-col
+        padding 0px
+
+        &:nth-child(1)
+          bottom -12px
+          left -30px
+          transform translateX(0%)
+
+        &:nth-child(2)
+          text-align right
+          border-radius 50px 4px 4px 150px
