@@ -5,16 +5,16 @@ require('whatwg-fetch');
 
 require('promise/polyfill');
 
-var _ExampleFunction = require('./components/ExampleFunction');
+var _CreatePersons = require('./components/CreatePersons');
 
-var _ExampleFunction2 = _interopRequireDefault(_ExampleFunction);
+var _CreatePersons2 = _interopRequireDefault(_CreatePersons);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // ========================================
 // Init Events  ---------------------------
 window.addEventListener('load', function () {
-  (0, _ExampleFunction2.default)();
+  (0, _CreatePersons2.default)();
 });
 
 // Default ------------------------------
@@ -23,59 +23,43 @@ window.addEventListener('load', function () {
 
 // Polyfill -----------------------------
 
-},{"./components/ExampleFunction":2,"promise/polyfill":8,"whatwg-fetch":9}],2:[function(require,module,exports){
+},{"./components/CreatePersons":2,"promise/polyfill":8,"whatwg-fetch":9}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 var ExampleFunction = function ExampleFunction() {
 
-    var userInfos = fetch('/javascripts/fazenda.json', { method: 'GET' });
+  var userInfos = fetch('/javascripts/fazenda.json', { method: 'GET' });
 
-    var makeElement = function makeElement(userResponse) {
-        var itemInfo = userResponse;
+  var makeElement = function makeElement(userResponse) {
+    var name = userResponse.name,
+        description = userResponse.description,
+        picture = userResponse.picture;
 
-        var listWrapper = document.querySelector('.ranking__body');
+    var listWrapper = document.querySelector('.ranking__body');
+    var listItem = document.createElement('li');
 
-        var elItem = document.createElement('li');
-        var elDivImg = document.createElement('div');
-        var elDivInf = document.createElement('div');
-        var elImage = document.createElement('img');
-        var elName = document.createElement('h3');
-        var elDesc = document.createElement('h6');
+    listItem.setAttribute('class', 'ranking__body__item');
 
-        elItem.setAttribute('class', 'ranking__body__item');
+    var markup = '\n      <div class="item-image">\n        <figure>\n          <img src=\'' + picture + '\' alt=\'' + name + '\' />\n        </figure>\n      </div>\n      <div class="item-divisor">\n        <h3>' + name + '</h3>\n        <h6>' + description + '</h6>\n      </div>\n    ';
 
-        elDivImg.setAttribute('class', 'item-image');
-        elDivInf.setAttribute('class', 'item-divisor');
+    listItem.innerHTML = markup;
+    listWrapper.appendChild(listItem);
+  };
 
-        elImage.setAttribute('src', itemInfo.picture);
-        elImage.setAttribute('alt', itemInfo.name);
+  userInfos.then(function (response) {
+    return response.json();
+  }).then(function (response) {
+    console.log('Persons: ', response);
 
-        elName.textContent = itemInfo.name;
-        elDesc.textContent = itemInfo.description;
-
-        elDivImg.appendChild(elImage);
-
-        elDivInf.appendChild(elName);
-        elDivInf.appendChild(elDesc);
-
-        elItem.appendChild(elDivImg);
-        elItem.appendChild(elDivInf);
-
-        listWrapper.appendChild(elItem);
-    };
-
-    userInfos.then(function (response) {
-        return response.json();
-    }).then(function (response) {
-        for (var item in response.data) {
-            makeElement(response.data[item]);
-        }
-    }).catch(function (err) {
-        return console.error(err);
-    });
+    for (var item in response.data) {
+      makeElement(response.data[item]);
+    }
+  }).catch(function (err) {
+    return console.error(err);
+  });
 };
 
 exports.default = ExampleFunction;
