@@ -45,7 +45,7 @@ var ChangeTooltipPosition = function ChangeTooltipPosition() {
     var getAccordionHeight = window.getComputedStyle(accordion).height.split('px')[0];
     var translateY = getAccordionHeight / items.length;
 
-    items.forEach(function (element, index) {
+    items.forEach(function () {
       hover.style.transform = 'translateY(' + translateY * current + 'px)';
     });
   };
@@ -56,7 +56,7 @@ var ChangeTooltipPosition = function ChangeTooltipPosition() {
   };
 
   items.forEach(function (element, index) {
-    if (screen >= 768) {
+    if (screen > 768) {
       items[index].addEventListener('mouseover', changePosition, false);
       items[index].addEventListener('mouseleave', defaultPosition, false);
     } else {
@@ -207,7 +207,7 @@ var ValidadePercent = function ValidadePercent(p, n) {
 
   var checkValue = function checkValue(currentValue) {
     if ((typeof currentValue === 'undefined' ? 'undefined' : _typeof(currentValue)) === _typeof('string')) {
-      currentValue = parseInt(currentValue);
+      currentValue = parseInt(currentValue, 10);
     } else if (currentValue === null || currentValue === undefined) {
       currentValue = 0;
     }
@@ -224,8 +224,8 @@ var ValidadePercent = function ValidadePercent(p, n) {
   }
 
   var results = {
-    positive: parseInt(positiveResult),
-    negative: parseInt(negativeResult)
+    positive: parseInt(positiveResult, 10),
+    negative: parseInt(negativeResult, 10)
   };
 
   return results;

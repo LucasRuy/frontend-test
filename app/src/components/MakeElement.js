@@ -1,9 +1,10 @@
 const MakeElement = (userResponse, currentIndex) => {
   const { name, description, picture } = userResponse.infos.user;
 
-  const listWrapper = document.querySelector('.ranking__body');
-  const tooltip     = document.querySelector('.tooltip');
-  const listItem    = document.createElement('li');
+  const doc = document;
+  const listWrapper = doc.querySelector('.ranking__body');
+  const tooltip = doc.querySelector('.tooltip');
+  const listItem = doc.createElement('li');
 
   listItem.setAttribute('class', 'ranking__body__item');
   listItem.setAttribute('data-id', currentIndex);
