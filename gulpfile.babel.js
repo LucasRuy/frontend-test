@@ -1,7 +1,5 @@
-'use strict';
-
 import gulp from 'gulp';
-import require_dir from 'require-dir';
+import requireDir from 'require-dir';
 
 export const directories = {
   app: {
@@ -9,16 +7,16 @@ export const directories = {
     templates: 'app/static/templates/index.pug',
     stylesheets: 'app/static/stylesheets/application.styl',
     javascripts: 'app/src/app.js',
-    json: 'app/src/json/*.json'
+    json: 'app/src/json/*.json',
   },
   public: {
     images: './public/images',
     templates: './public/',
     stylesheets: './public/stylesheets',
-    javascripts: './public/javascripts'
-  }
+    javascripts: './public/javascripts',
+  },
 };
 
-require_dir('./gulp_tasks');
+requireDir('./gulp_tasks');
 
 gulp.task('default', ['pug', 'stylus', 'images', 'javascripts', 'browserSync', 'watch']);

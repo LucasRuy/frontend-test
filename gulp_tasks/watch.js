@@ -9,14 +9,14 @@ gulp.task('watch', () => {
       'app/static/templates/views/!(_)*.pug',
       'app/static/templates/components/!(_)*.pug'
     ],
-    ['pug']
+    ['pug'],
   );
 	gulp.watch(
     'app/static/stylesheets/**/*.styl',
-    ['stylus']
+    ['stylus'],
   );
 	gulp.watch(
     'app/src/**/*.js',
-    ['javascripts']
+    ['javascripts'],
   );
 });

@@ -6,11 +6,11 @@
   import 'promise/polyfill';
   import 'nodelist-foreach-polyfill';
 
-	// CreatePersons ------------------------
-	import CreatePersons from './components/CreatePersons';
+  // CreatePersons ------------------------
+  import CreatePersons from './components/CreatePersons';
 
 // ========================================
 // Init Events  ---------------------------
 window.addEventListener('load', function(){
-	CreatePersons();
+  CreatePersons();
 });

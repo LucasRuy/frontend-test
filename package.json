@@ -2,7 +2,8 @@
   "name": "R7FrontendTest",
   "version": "0.0.1",
   "scripts": {
-    "start": "gulp"
+    "start": "gulp --color",
+    "lint": "./node_modules/.bin/eslint app/src/**/*.js"
   },
   "dependencies": {
     "nodelist-foreach-polyfill": "^1.2.0",
@@ -24,7 +25,9 @@
     "gulp-pug": "^3.3.0",
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^2.6.4",
+    "gulp-strip-comments": "^2.5.2",
     "gulp-stylus": "^2.7.0",
+    "gulp-uglify": "^3.0.0",
     "pug": "^2.0.0-rc.4",
     "require-dir": "^1.0.0",
     "vinyl-buffer": "^1.0.1",
