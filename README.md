@@ -1,6 +1,6 @@
 # A Fazenda - Ranking
 
-Ranking de participantes de reality show 'A Fazenda' com indice de aprovação e reprovação.
+Ranking de participantes de reality show **A Fazenda** com indice de aprovação e reprovação.
 
 ## Começando usar
 
@@ -21,6 +21,39 @@ Os comandos a seguir devem fazer isso para você.
 ```
 npm install
 ```
+
+### Tarefas Gulp.js
+
+Lista de tarefas inclusas em `gulp_tasks`.
+  - `images.js` responsável copiar e otimizar imagens para pasta `public`.
+  - `javascripts.js` concatena todas arquivos inclusos em `app/src/components`, compila e gera um bundle.
+  - `pug.js` compila os arquivos `.pug` e gera um HTML final.
+  - `server.js` inicia servidor local com Browser Sync.
+  - `stylus.js` compila arquivos `.styl` para `.css`.
+  - `watch.js` observa mudanças no código.
+
+## Iniciando com Gulp.js
+
+Neste projeto é utilizado `gulp.js` para automatizar tarefas rotineiras.
+
+Comandos para iniciar seu `gulpfile.babel.js`.
+  - `gulp` para executar a tarefa `default`.
+  - `gulp images` para otimizar as imagens
+  - `gulp javascripts` para compilar arquivos `.js`
+  - `gulp pug` para compilar arquivos `.pug`
+  - `gulp browserSync` para iniciar o servidor local
+  - `gulp stylus` para compilar arquivos `.styl`
+  - `gulp watch` para iniciar observador de alterações no código
+
+Ou você pode simplesmente digitar
+
+```
+npm run start
+```
+
+* Após iniciar a tarefa `default` do gulp ou utilizar `npm run start`, serão disponibilizados dois links para acessar o projeto.
+- Local: <http://localhost:3000/>
+- Externo: <http://your-ip:3000/>
 
 ## Executando ESLint
 
