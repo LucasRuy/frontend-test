@@ -4,7 +4,7 @@ import ValidadePercent from './ValidadePercent';
 import MakeElement from './MakeElement';
 import { orderObjDesc } from '../utils';
 
-const ExampleFunction = () => {
+const CreatePersons = () => {
   const userInfos = fetch('/javascripts/fazenda.json', { method: 'GET' });
   userInfos
     .then(response => response.json())
@@ -33,4 +33,4 @@ const ExampleFunction = () => {
     .catch(err => console.error(err));
 };
 
-export default ExampleFunction;
+export default CreatePersons;

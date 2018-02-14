@@ -12,6 +12,7 @@ const ValidadePercent = (p, n) => {
   };
 
   const total = checkValue(positive) + checkValue(negative);
+
   let positiveResult = ((positive / total) * 100).toFixed(0);
   let negativeResult = Math.abs(positiveResult - 100);
 
