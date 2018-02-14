@@ -1,6 +1,6 @@
 {
   "name": "R7FrontendTest",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "eslintConfig": {
     "env": {
       "browser": true,

@@ -1,49 +1,106 @@
-### Sobre o R7.com
-O R7.com é um portal mantido pela Record TV, com quase 9 anos de vida. Possui mais de 50 milhões de visitantes únicos e 200 milhões de pageviews mensalmente e conta coma uma equipe de quase 300 pessoas.
+# A Fazenda - Ranking
 
-### Teste FrontEnd para o R7.com!
-Essa teste consiste em entendermos um pouco mais sobre seus conhecimentos com HTML, CSS,
-JavaScript, Código responsivo, suporte a crossbrowser e lógica.
+Ranking de participantes de reality show 'A Fazenda' com indice de aprovação e reprovação.
 
-### Orientações
-Primeiramente, faça um fork e clone do projeto;
-Crie uma branch (pode ser com seu nome mesmo) e depois instale as dependências:
+## Começando usar
 
-```sh
+### Pré-requisitos
+
+Para começar primeiro você deverá clonar ou fazer o download do repositório.
+
+Você também deve ter node.js e npm instalados na seu computador.
+
+Para baixar o [node.js](https://nodejs.org/en/) basta clicar no link, geralmente o npm é instalado junto com o node.js.
+
+### Instalando
+
+O primeiro passo que deve seguir para executar o projeto é instalar todas as dependências do mesmo.
+
+Os comandos a seguir devem fazer isso para você.
+
+```
 npm install
 ```
 
-Após isso, rode a aplicação:
-```sh
-npm start
+## Executando ESLint
+
+Este projeto utiliza ESLint para pegar erros no código de arquivos Javascript.
+
+Para executar o ESLint.
+
+```
+npm run lint
 ```
 
-Depois do seu setup você precisará seguir as seguintes instruções, para construir a aplicação:
+## Executando testes
 
-1. Desenvolver a página, que tem o seu layout em **a-fazenda.psd**.(A única fonte usada foi a Montserrat, disponível no Google Fonts)
-2. Criar um JavaScript que faça a requisição para **/fazenda.json**
-  * Apresentar os dados requisitados pelo layout.
-  * Calcular a porcentagem de "positives" e "negatives".
-  * Ordernar os items do json a partir da porcentagem calculada acima.
-3.  **NÃO** alterar o arquivo **fazenda.json**. Em hipótese nenhuma!
-4. Se for preciso modificar a estrutura e workflow, atualizar o README.
-5. Submeta o Pull Request e envie um email para apinto@rederecord.com.br :D
+Abaixo os comandos para começar a rodar os testes.
 
-### Requisitos obrigatórios
-1. Escreva o código com BackboneJS ou VanillaJS  ;)
-2. Utilizar um pré-processador CSS de sua preferência.
-3. Testes e documentação.
-4. Automação de tarefas. (Gulp? Grunt? Webpack? :D)
-5. Semântica Web
-6. Template Engines (underscore, mustache, ou outras de sua preferência)
-7. Ser fiel ao .psd.
-8. Suporte para IE11 e multiplataforma (crossbrowser web / mobile - Responsivo).
-9. Não usar geradores como yeoman, angular-cli, create-react-app, etc..
-10. Procure manter a estrutura do projeto.
+### Uso básico
 
-### Requisitos extras 
-1. Acessibilidade
-2. SEO
-3. Performance
+Para executar o teste apenas uma vez.
 
-<sub>Os dados presentes neste teste são totalmente fictícios.</sub>
+```
+npm test
+```
+
+### Uso com 'watch'
+
+Para ficar assistindo mudanças no código do teste.
+
+```
+npm run test:tdd
+```
+
+### Estrutura da pasta `app`
+
+Abaixo a estrutura de pastas.
+
+```sh
+├── app
+│   ├── src
+│   │    ├── components
+│   │    ├── json
+│   │    ├── tests
+│   │    ├── utils
+│   │    └── app.js
+│   └── static
+│        ├── images
+│        ├── stylesheets
+│        │    ├── base
+│        │    ├── components
+│        │    ├── config
+│        │    ├── layout
+│        │    │     ├── section
+│        │    │     └── views
+│        │    └── application.styl
+│        └── templates
+│               ├── components
+│               ├── views
+│               └── index.pug
+```
+
+### Public
+
+Alterações da pasta `public`.
+  - Arquivo `fazenda.json` foi movido para dentro da pasta `javascripts`.
+
+## Desenvolvido com
+
+* [PUG Template Engine](https://pugjs.org/api/getting-started.html) - Template engine de alta performance baseado no Haml.
+* [Browser Sync](https://browsersync.io/) - Teste de navegador sincronizado que economiza tempo.
+* [Gulp.js](https://gulpjs.com/) - Automatize e aprimore seu fluxo de trabalho.
+* [Babel](http://babeljs.io/) - O compilador de Javascript.
+* [ESLint](https://eslint.org/) - Linter para código Javascript.
+* [Stylus](http://stylus-lang.com/) - CSS exoressuvi, dinâmico e robusto.
+* [Mocha](https://mochajs.org/) - Simples, flexivel e divertido.
+* [Chai](http://chaijs.com/) - Biblioteca de asserção BDD/TDD.
+* [Browserify](http://browserify.org/) - Browserify permite exigir ('módulos') no navegador agrupando todas as suas dependências.
+
+## Desenvolvimento
+
+Este projeto foi desenvolvido com muito <3 e Javascript.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
